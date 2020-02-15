@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class DataStructureConverterTes {
+public class DataStructureConverterTest {
 
   private UserMock userMock;
 
