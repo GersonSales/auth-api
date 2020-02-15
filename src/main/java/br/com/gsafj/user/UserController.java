@@ -16,18 +16,18 @@ public class UserController {
   }
 
   @GetMapping
-  public List<UserModel> getAll() {
+  public final List<UserVO> getAll() {
     return this.userService.findAll();
   }
 
   @GetMapping("/{id}")
-  public UserModel getById(@PathVariable final String id) {
+  public final UserVO getById(@PathVariable final String id) {
     return this.userService.findById(id);
   }
 
   @PostMapping
-  public UserModel post(@RequestBody UserModel userModel) {
-    return this.userService.create(userModel);
+  public final UserVO post(@RequestBody UserVO userVO) {
+    return this.userService.create(userVO);
   }
 
   @DeleteMapping("{id}")

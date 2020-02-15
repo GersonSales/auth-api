@@ -2,9 +2,9 @@ package br.com.gsafj.user;
 
 import br.com.gsafj.exception.MalformedUserInfoException;
 import br.com.gsafj.exception.UserNotFoundException;
+import br.com.gsafj.util.DataStructureConverter;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service(value = "userService")
@@ -16,17 +16,17 @@ public class UserService {
     this.userRepository = userRepository;
   }
 
-
-  public List<UserModel> findAll() {
-    return this.userRepository.findAll();
-
+  public List<UserVO> findAll() {
+    return DataStructureConverter.parseAll(
+        this.userRepository.findAll(),
+        UserVO.class);
   }
 
-  public UserModel findById(final String id) {
+  public UserVO findById(final String id) {
     throw new UserNotFoundException();
   }
 
-  public UserModel create(final UserModel userModel) {
+  public UserVO create(final UserVO userModel) {
     throw new MalformedUserInfoException();
   }
 
