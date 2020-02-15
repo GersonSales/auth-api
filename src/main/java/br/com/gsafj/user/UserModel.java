@@ -25,4 +25,12 @@ public class UserModel implements Serializable {
   public final Long getId() {
     return id;
   }
+
+  public final String getFirstName() {
+    return firstName;
+  }
+
+  public final String getLastName() {
+    return lastName;
+  }
 }
