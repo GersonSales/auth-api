@@ -1,5 +1,6 @@
 package br.com.gsafj.user;
 
+import br.com.gsafj.exception.UserNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class UserService {
   }
 
   public UserModel findById(final String id) {
-    return new UserModel();
+    throw new UserNotFoundException();
   }
 
   public UserModel create(UserModel userModel) {
