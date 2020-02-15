@@ -19,6 +19,7 @@ public class DataStructureConverterTes {
     this.userMock = new UserMock();
   }
 
+
   @Test
   public void parseUserVOToModel() {
     final UserVO userVO = userMock.getUserVOMock();
@@ -54,8 +55,6 @@ public class DataStructureConverterTes {
   }
 
 
-
-
   @Test
   public void parseUserModelToVO() {
     final UserModel userModel = userMock.getUserModelMock();
@@ -88,9 +87,6 @@ public class DataStructureConverterTes {
       Assert.assertEquals(userModel.getPassword(), userVO.getPassword());
     }
   }
-
-
-
 
 
 }
