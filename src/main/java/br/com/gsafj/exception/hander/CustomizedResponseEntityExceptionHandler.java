@@ -1,6 +1,7 @@
 package br.com.gsafj.exception.hander;
 
 import br.com.gsafj.exception.ExceptionResponse;
+import br.com.gsafj.exception.MalformedUserInfoException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -18,17 +19,30 @@ public class CustomizedResponseEntityExceptionHandler
   public final ResponseEntity<ExceptionResponse> handleAllExceptions(
       final Exception exception,
       final WebRequest request) {
-
-    final ExceptionResponse exceptionResponse
-        = getExceptionResponse(exception, request);
-
-    return new ResponseEntity<ExceptionResponse>(exceptionResponse,
-        HttpStatus.INTERNAL_SERVER_ERROR);
+    final ExceptionResponse response = getExceptionResponse(exception, request);
+    return getResponseEntity(response, HttpStatus.INTERNAL_SERVER_ERROR);
   }
+
+
+  @ExceptionHandler(MalformedUserInfoException.class)
+  public final ResponseEntity<ExceptionResponse> handleMalformedUserException(
+      final Exception exception,
+      final WebRequest request) {
+    final ExceptionResponse response = getExceptionResponse(exception, request);
+    return getResponseEntity(response, HttpStatus.BAD_REQUEST);
+  }
+
+  private ResponseEntity<ExceptionResponse> getResponseEntity(
+      final ExceptionResponse response,
+      final HttpStatus badRequest) {
+    return new ResponseEntity<ExceptionResponse>(response, badRequest);
+  }
+
 
   private ExceptionResponse getExceptionResponse(final Exception exception,
                                                  final WebRequest request) {
-    return new ExceptionResponse(exception.getMessage(),
+    return new ExceptionResponse(
+        exception.getMessage(),
         request.getDescription(false));
   }
 
