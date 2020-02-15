@@ -16,33 +16,22 @@ public class UserController {
     this.userService = userService;
   }
 
-  @RequestMapping(
-      method = RequestMethod.GET,
-      produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping
   public List<UserModel> getAll() {
     return this.userService.findAll();
   }
 
-  @RequestMapping(
-      value = "/{id}",
-      method = RequestMethod.GET,
-      produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping("/{id}")
   public UserModel getById(@PathVariable final String id) {
     return this.userService.findById(id);
   }
 
-  @RequestMapping(
-      method = RequestMethod.POST,
-      consumes = MediaType.APPLICATION_JSON_VALUE,
-      produces = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping
   public UserModel post(@RequestBody UserModel userModel) {
     return this.userService.create(userModel);
   }
 
-
-  @RequestMapping(
-      value = "/{id}",
-      method = RequestMethod.DELETE)
+  @DeleteMapping("{id}")
   public void delete(@PathVariable String id) {
     this.userService.remove(id);
   }
