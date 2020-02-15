@@ -9,8 +9,16 @@ import java.util.List;
 
 @Service(value = "userService")
 public class UserService {
+
+  private final UserRepository userRepository;
+
+  public UserService(final UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
+
+
   public List<UserModel> findAll() {
-    return new ArrayList<UserModel>();
+    return this.userRepository.findAll();
 
   }
 

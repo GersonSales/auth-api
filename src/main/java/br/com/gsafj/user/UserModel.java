@@ -10,7 +10,7 @@ public class UserModel implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Double id;
+  private Long id;
 
   @Column(name = "first_name")
   private String firstName;
@@ -22,7 +22,7 @@ public class UserModel implements Serializable {
   private String password;
 
 
-  public final Double getId() {
+  public final Long getId() {
     return id;
   }
 }
