@@ -18,11 +18,11 @@ public class UserService {
     throw new UserNotFoundException();
   }
 
-  public UserModel create(UserModel userModel) {
+  public UserModel create(final UserModel userModel) {
     throw new MalformedUserInfoException();
   }
 
-  public void remove(String id) {
+  public void remove(final String id) {
     throw new UserNotFoundException();
   }
 }
