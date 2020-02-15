@@ -8,17 +8,17 @@ import java.util.List;
 
 public class DataStructureConverter {
 
-  public static final Mapper mapper = DozerBeanMapperBuilder.buildDefault();
+  private static final Mapper mapper = DozerBeanMapperBuilder.buildDefault();
 
-  private static <T> T parseObject(final Object origin,
+  public static <T> T parseObject(final Object origin,
                                    final Class<T> destination) {
     return mapper.map(origin, destination);
   }
 
-  private static <T> List<T> parseAll(final List<Object> originList,
+  public static <O, T> List<T> parseAll(final List<O> originList,
                                       final Class<T> destination) {
     final List<T> result = new ArrayList<>();
-    for (final Object origin : originList) {
+    for (final O origin : originList) {
       result.add(mapper.map(origin, destination));
     }
     return result;

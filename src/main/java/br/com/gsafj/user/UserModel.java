@@ -21,16 +21,35 @@ public class UserModel implements Serializable {
   @Column(name = "password")
   private String password;
 
-
-  public final Long getId() {
+  public Long getId() {
     return id;
   }
 
-  public final String getFirstName() {
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getFirstName() {
     return firstName;
   }
 
-  public final String getLastName() {
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
     return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
   }
 }
