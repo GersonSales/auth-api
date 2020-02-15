@@ -17,4 +17,12 @@ public class UserService {
   public UserModel findById(final String id) {
     return new UserModel();
   }
+
+  public UserModel create(UserModel userModel) {
+    return null;
+  }
+
+  public void remove(String id) {
+
+  }
 }

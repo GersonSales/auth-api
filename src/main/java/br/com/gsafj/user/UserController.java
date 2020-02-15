@@ -2,10 +2,7 @@ package br.com.gsafj.user;
 
 
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,6 +29,22 @@ public class UserController {
       produces = MediaType.APPLICATION_JSON_VALUE)
   public UserModel getById(@PathVariable final String id) {
     return this.userService.findById(id);
+  }
+
+  @RequestMapping(
+      method = RequestMethod.POST,
+      consumes = MediaType.APPLICATION_JSON_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  public UserModel post(@RequestBody UserModel userModel) {
+    return this.userService.create(userModel);
+  }
+
+
+  @RequestMapping(
+      value = "/{id}",
+      method = RequestMethod.DELETE)
+  public void delete(@PathVariable String id) {
+    this.userService.remove(id);
   }
 
 
