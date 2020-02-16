@@ -9,18 +9,15 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 public class HateoasLinkFactory {
 
-  public static void linkToGetByIdWithSelfRel(
-      final RepresentationModel<?> representationModel,
-      Class<? extends RestContract> restController,
-      ViewObjectContract viewObject) {
+  public static <T extends RepresentationModel<?> & ViewObjectContract>
+  void linkToGetByIdWithSelfRel(
+      final T representationModel,
+      Class<? extends RestContract> restController) {
 
     representationModel.add(
         linkTo(
-            methodOn(restController).getById(viewObject.getId()))
+            methodOn(restController).getById(representationModel.getId()))
             .withSelfRel()
     );
-
   }
-
-
 }

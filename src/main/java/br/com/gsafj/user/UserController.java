@@ -1,14 +1,17 @@
 package br.com.gsafj.user;
 
 
+import br.com.gsafj.contract.RestContract;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static br.com.gsafj.config.hateoas.HateoasLinkFactory.linkToGetByIdWithSelfRel;
+
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserController implements RestContract {
   private final UserService userService;
 
 
@@ -24,6 +27,7 @@ public class UserController {
   @GetMapping("/{id}")
   public final UserVO getById(@PathVariable final Long id) {
     final UserVO userVo = this.userService.findById(id);
+    linkToGetByIdWithSelfRel(userVo, UserController.class);
     return userVo;
   }
 

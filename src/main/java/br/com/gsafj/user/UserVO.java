@@ -1,5 +1,6 @@
 package br.com.gsafj.user;
 
+import br.com.gsafj.contract.ViewObjectContract;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
@@ -7,7 +8,7 @@ import java.io.Serializable;
 
 public class UserVO
     extends RepresentationModel<UserVO>
-    implements Serializable {
+    implements ViewObjectContract, Serializable {
   private static final long serialVersionUID = 1L;
 
   private Long id;
