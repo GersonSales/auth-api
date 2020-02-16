@@ -26,9 +26,9 @@ public class UserController implements RestContract {
 
   @GetMapping("/{id}")
   public final UserVO getById(@PathVariable final Long id) {
-    final UserVO userVo = this.userService.findById(id);
-    linkToGetByIdWithSelfRel(userVo, UserController.class);
-    return userVo;
+    return linkToGetByIdWithSelfRel(
+        this.userService.findById(id),
+        UserController.class);
   }
 
   @PostMapping
