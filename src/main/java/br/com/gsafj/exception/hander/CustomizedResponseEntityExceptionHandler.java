@@ -2,6 +2,7 @@ package br.com.gsafj.exception.hander;
 
 import br.com.gsafj.exception.ExceptionResponse;
 import br.com.gsafj.exception.MalformedUserInfoException;
+import br.com.gsafj.exception.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -30,6 +31,14 @@ public class CustomizedResponseEntityExceptionHandler
       final WebRequest request) {
     final ExceptionResponse response = getExceptionResponse(exception, request);
     return getResponseEntity(response, HttpStatus.BAD_REQUEST);
+  }
+
+  @ExceptionHandler(UserNotFoundException.class)
+  public final ResponseEntity<ExceptionResponse> handleUserNotFoundException(
+      final Exception exception,
+      final WebRequest request) {
+    final ExceptionResponse response = getExceptionResponse(exception, request);
+    return getResponseEntity(response, HttpStatus.NOT_FOUND);
   }
 
   private ResponseEntity<ExceptionResponse> getResponseEntity(
