@@ -23,7 +23,8 @@ public class UserController {
 
   @GetMapping("/{id}")
   public final UserVO getById(@PathVariable final Long id) {
-    return this.userService.findById(id);
+    final UserVO userVo = this.userService.findById(id);
+    return userVo;
   }
 
   @PostMapping

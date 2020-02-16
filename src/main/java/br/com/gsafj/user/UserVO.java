@@ -1,14 +1,20 @@
 package br.com.gsafj.user;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import java.io.Serializable;
 
-public class UserVO implements Serializable {
+
+public class UserVO
+    extends RepresentationModel<UserVO>
+    implements Serializable {
   private static final long serialVersionUID = 1L;
 
   private Long id;
   private String firstName;
   private String lastName;
   private String password;
+
 
   public Long getId() {
     return id;
