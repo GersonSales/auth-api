@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static br.com.gsafj.config.hateoas.HateoasLinkFactory.linkToGetByIdWithSelfRel;
+import static br.com.gsafj.config.hateoas.HateoasLinkFactory.linkAllToRepresentationByIdWithSelfRel;
+import static br.com.gsafj.config.hateoas.HateoasLinkFactory.linkToRepresentationByIdWithSelfRel;
 
 @RestController
 @RequestMapping("/user")
@@ -21,24 +22,32 @@ public class UserController implements RestContract {
 
   @GetMapping
   public final List<UserVO> getAll() {
-    return this.userService.findAll();
+    return linkAllToRepresentationByIdWithSelfRel(
+        this.userService.findAll(),
+        UserController.class
+    );
   }
 
   @GetMapping("/{id}")
   public final UserVO getById(@PathVariable final Long id) {
-    return linkToGetByIdWithSelfRel(
+    return linkToRepresentationByIdWithSelfRel(
         this.userService.findById(id),
         UserController.class);
   }
 
   @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
   public final UserVO post(@RequestBody final UserVO userVO) {
-    return this.userService.create(userVO);
+    return linkToRepresentationByIdWithSelfRel(
+        this.userService.create(userVO),
+        UserController.class);
   }
 
   @PutMapping
   public final UserVO put(@RequestBody final UserVO userVO) {
-    return this.userService.update(userVO);
+    return linkToRepresentationByIdWithSelfRel(
+        this.userService.update(userVO),
+        UserController.class);
   }
 
   @DeleteMapping("{id}")
