@@ -41,6 +41,4 @@ public class UserController {
   public void delete(@PathVariable final Long id) {
     this.userService.remove(id);
   }
-
-
 }
