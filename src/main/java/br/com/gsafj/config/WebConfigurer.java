@@ -15,7 +15,6 @@ import static br.com.gsafj.config.WebConstants.*;
 
 
 @Configuration
-@EnableWebMvc
 public class WebConfigurer implements WebMvcConfigurer {
 
   @Override
