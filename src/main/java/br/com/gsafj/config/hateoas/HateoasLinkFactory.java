@@ -14,7 +14,7 @@ public class HateoasLinkFactory {
   public static <T extends RepresentationModel<?> & ViewObjectContract>
   T linkToRepresentationByIdWithSelfRel(
       final T representationModel,
-      Class<? extends RestContract> restController) {
+      final Class<? extends RestContract> restController) {
 
     representationModel.add(
         linkTo(
@@ -27,7 +27,7 @@ public class HateoasLinkFactory {
   public static <T extends RepresentationModel<?> & ViewObjectContract>
   List<T> linkAllToRepresentationByIdWithSelfRel(
       final List<T> representationModelList,
-      Class<? extends RestContract> restController) {
+      final Class<? extends RestContract> restController) {
     representationModelList
         .forEach(viewObject ->
             linkToRepresentationByIdWithSelfRel(viewObject, restController));
