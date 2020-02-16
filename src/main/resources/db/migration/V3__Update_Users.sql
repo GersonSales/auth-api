@@ -1,0 +1,1 @@
+UPDATE auth_api_db.user SET first_name = 'Gerson', last_name = 'Sales', password = '12345' WHERE id = 6;
