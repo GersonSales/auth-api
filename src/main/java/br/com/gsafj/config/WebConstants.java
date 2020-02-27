@@ -23,4 +23,5 @@ public class WebConstants {
   public static final String OPTIONS = "OPTIONS";
   public static final String TRACE = "TRACE";
 
+  public static final String CORS_ALLOWED_PATHS = "/**";
 }

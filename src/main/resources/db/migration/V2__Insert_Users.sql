@@ -1,1 +1,0 @@
-INSERT INTO auth_api_db.user (id, first_name, last_name, password) VALUES (6, 'Gerson', 'Sales', '12345');
