@@ -1,6 +1,5 @@
 package br.com.gsafj.user;
 
-import br.com.gsafj.exception.MalformedUserInfoException;
 import br.com.gsafj.exception.UserNotFoundException;
 import org.springframework.stereotype.Service;
 
