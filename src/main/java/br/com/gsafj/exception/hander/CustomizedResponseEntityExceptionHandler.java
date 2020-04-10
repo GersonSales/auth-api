@@ -1,6 +1,7 @@
 package br.com.gsafj.exception.hander;
 
 import br.com.gsafj.exception.ExceptionResponse;
+import br.com.gsafj.exception.InvalidJwtAuthenticationException;
 import br.com.gsafj.exception.MalformedUserInfoException;
 import br.com.gsafj.exception.UserNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -39,6 +40,14 @@ public class CustomizedResponseEntityExceptionHandler
       final WebRequest request) {
     final ExceptionResponse response = getExceptionResponse(exception, request);
     return getResponseEntity(response, HttpStatus.NOT_FOUND);
+  }
+
+  @ExceptionHandler(InvalidJwtAuthenticationException.class)
+  public final ResponseEntity<ExceptionResponse> InvalidJwtAuthenticationException(
+      final Exception exception,
+      final WebRequest request) {
+    final ExceptionResponse response = getExceptionResponse(exception, request);
+    return getResponseEntity(response, HttpStatus.BAD_REQUEST);
   }
 
   private ResponseEntity<ExceptionResponse> getResponseEntity(
