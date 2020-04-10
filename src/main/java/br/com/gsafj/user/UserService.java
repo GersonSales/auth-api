@@ -1,6 +1,9 @@
 package br.com.gsafj.user;
 
 import br.com.gsafj.exception.UserNotFoundException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,7 +12,7 @@ import static br.com.gsafj.util.DataStructureConverter.parseAll;
 import static br.com.gsafj.util.DataStructureConverter.parseObject;
 
 @Service(value = "userService")
-public class UserService {
+public class UserService implements UserDetailsService {
 
   private final UserRepository userRepository;
 
@@ -54,5 +57,15 @@ public class UserService {
     } else {
       throw new UserNotFoundException();
     }
+  }
+
+  @Override
+  public UserDetails loadUserByUsername(final String username)
+      throws UsernameNotFoundException {
+    final UserModel userModel = this.userRepository.findByUserName(username);
+    if (userModel == null){
+      throw new UsernameNotFoundException("User not found"); //TODO remove
+    }
+    return userModel;
   }
 }
