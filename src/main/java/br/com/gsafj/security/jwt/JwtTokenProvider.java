@@ -1,6 +1,7 @@
-package br.com.gsafj.security;
+package br.com.gsafj.security.jwt;
 
 import br.com.gsafj.exception.InvalidJwtAuthenticationException;
+import br.com.gsafj.exception.TokenRequestException;
 import br.com.gsafj.user.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
 import java.util.Date;
@@ -75,6 +77,14 @@ public class JwtTokenProvider {
         .getSignature();
   }
 
+  public String resolveToken(final ServletRequest request) {
+    if (request instanceof HttpServletRequest) {
+      return this.resolveToken((HttpServletRequest) request);
+    }
+    throw new TokenRequestException();
+  }
+
+
 
   public String resolveToken(final HttpServletRequest request) {
     final String bearerToken = request.getHeader("Authorization");
@@ -89,7 +99,7 @@ public class JwtTokenProvider {
     return result;
   }
 
-  public boolean validateToken(final String token) throws InvalidJwtAuthenticationException {
+  public boolean isAValidToken(final String token) {
     try {
       return Jwts.parser()
           .setSigningKey(secretKey)
