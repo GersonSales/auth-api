@@ -1,9 +1,11 @@
 package br.com.gsafj.user;
 
+import br.com.gsafj.exception.UserAlreadyExistsException;
 import br.com.gsafj.exception.UserNotFoundException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,9 +37,14 @@ public class UserService implements UserDetailsService {
   }
 
   public UserVO create(final UserVO userVO) {
+    checkIfUsernameIsAvailable(userVO.getUsername());
+    final String encryptedPassword =
+        new BCryptPasswordEncoder().encode(userVO.getPassword());
+    userVO.setPassword(encryptedPassword);
     final UserModel userModel = parseObject(userVO, UserModel.class);
     return parseObject(this.userRepository.save(userModel), UserVO.class);
   }
+
 
   public void remove(final Long id) {
     if (this.userRepository.existsById(id)) {
@@ -62,10 +69,17 @@ public class UserService implements UserDetailsService {
   @Override
   public UserDetails loadUserByUsername(final String username)
       throws UsernameNotFoundException {
-    final UserModel userModel = this.userRepository.findByUserName(username);
-    if (userModel == null){
+    final UserModel userModel = this.userRepository.findByUsername(username);
+    if (userModel == null) {
       throw new UsernameNotFoundException("User not found"); //TODO remove
     }
     return userModel;
+  }
+
+  private void checkIfUsernameIsAvailable(String username) {
+    final UserModel user = userRepository.findByUsername(username);
+    if (user != null) {
+      throw new UserAlreadyExistsException();
+    }
   }
 }

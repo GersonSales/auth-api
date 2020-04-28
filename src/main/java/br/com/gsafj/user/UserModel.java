@@ -19,8 +19,8 @@ public class UserModel implements UserDetails, Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(name = "user_name")
-  private String userName;
+  @Column(name = "username")
+  private String username;
 
   @Column(name = "first_name")
   private String firstName;
@@ -50,6 +50,12 @@ public class UserModel implements UserDetails, Serializable {
       inverseJoinColumns = {@JoinColumn(name = "id_permission")})
   private List<Permission> permissions;
 
+  public UserModel() {
+    this.accountNonExpired = true;
+    this.accountNonLocked = true;
+    this.credentialsNonExpired = true;
+    this.enabled = true;
+  }
 
   public Long getId() {
     return id;
@@ -61,14 +67,18 @@ public class UserModel implements UserDetails, Serializable {
 
   @Override
   public String getUsername() {
-    return this.userName;
+    return this.username;
+  }
+
+  public void setUsername(final String username) {
+    this.username = username;
   }
 
   public String getFirstName() {
     return firstName;
   }
 
-  public void setFirstName(String firstName) {
+  public void setFirstName(final String firstName) {
     this.firstName = firstName;
   }
 
@@ -76,7 +86,7 @@ public class UserModel implements UserDetails, Serializable {
     return lastName;
   }
 
-  public void setLastName(String lastName) {
+  public void setLastName(final String lastName) {
     this.lastName = lastName;
   }
 
@@ -90,7 +100,7 @@ public class UserModel implements UserDetails, Serializable {
   }
 
 
-  public void setPassword(String password) {
+  public void setPassword(final String password) {
     this.password = password;
   }
 
@@ -98,7 +108,7 @@ public class UserModel implements UserDetails, Serializable {
     return accountNonExpired;
   }
 
-  public void setAccountNonExpired(boolean accountNonExpired) {
+  public void setAccountNonExpired(final boolean accountNonExpired) {
     this.accountNonExpired = accountNonExpired;
   }
 
@@ -106,7 +116,7 @@ public class UserModel implements UserDetails, Serializable {
     return accountNonLocked;
   }
 
-  public void setAccountNonLocked(boolean accountNonLocked) {
+  public void setAccountNonLocked(final boolean accountNonLocked) {
     this.accountNonLocked = accountNonLocked;
   }
 
@@ -114,7 +124,7 @@ public class UserModel implements UserDetails, Serializable {
     return credentialsNonExpired;
   }
 
-  public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+  public void setCredentialsNonExpired(final boolean credentialsNonExpired) {
     this.credentialsNonExpired = credentialsNonExpired;
   }
 
@@ -122,7 +132,7 @@ public class UserModel implements UserDetails, Serializable {
     return enabled;
   }
 
-  public void setEnabled(boolean enabled) {
+  public void setEnabled(final boolean enabled) {
     this.enabled = enabled;
   }
 

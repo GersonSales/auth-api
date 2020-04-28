@@ -1,4 +1,4 @@
-INSERT INTO users (user_name, first_name, last_name, password,
+INSERT INTO users (username, first_name, last_name, password,
                      account_non_expired, account_non_locked,
                      credentials_non_expired, enabled)
 VALUES ('gersonsafj', 'Gerson', 'Sales',
